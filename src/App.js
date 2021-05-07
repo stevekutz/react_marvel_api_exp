@@ -12,12 +12,34 @@ function App() {
     const base_URL = "http://gateway.marvel.com/v1/public/characters?limit=100&ts=1&";
 
 
-    const [charData, setCharData] = useState("")
+    const [charData, setCharData] = useState("");
+    const [startLetter, setStartLetter] = useState('a');
 
-    let url = base_URL + process.env.REACT_APP_KEY + process.env.REACT_APP_HASH;
+
+
+
+    let url = base_URL + "nameStartsWith=" + startLetter.slice(-1) + process.env.REACT_APP_KEY + process.env.REACT_APP_HASH;
     console.log(" url >>> ", url);
 
+
+    const inputHandler = (e) => {
+
+        let ch = e.target.value;
+
+        if (ch.match(/^[a-z]+$/i) !== null){
+        
+            setStartLetter(e.target.value);
+    
+        }
+
+        console.log(" startLetter ", startLetter);
+    }
+
+
     useEffect( () => {
+
+        setStartLetter(startLetter);
+
         fetch(url)
         // fetch(`"${process.env.REACT_APP_URL}"`)
             .then(res => {
@@ -39,7 +61,7 @@ function App() {
     
     
     
-    }, [url])
+    }, [url, startLetter])
  
 
     useEffect( () => {
@@ -55,11 +77,17 @@ function App() {
 
 
 
-
-
   return (
     <div className="App">
        <h1> Marvel API exp </h1>
+
+    <input
+        type = "text"
+        // maxLength = {1}
+        value = {startLetter.slice(-1)}
+        onChange = { (e) => inputHandler(e)}
+    ></input>
+
 
     {charData && charData.data.results.map ( (char) => {
         return (
