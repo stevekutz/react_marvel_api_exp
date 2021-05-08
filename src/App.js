@@ -2,12 +2,13 @@ import logo from './logo.svg';
 import './App.css';
 import React, {useState, useEffect} from 'react';
 
+import ClickBar from './ClickBar';
 
 
 function App() {
 
-    console.log(' secret ', process.env.REACT_APP_SECRET);
-    console.log(' key ', process.env.REACT_APP_KEY);
+    // console.log(' secret ', process.env.REACT_APP_SECRET);
+    // console.log(' key ', process.env.REACT_APP_KEY);
 
     const base_URL = "http://gateway.marvel.com/v1/public/characters?limit=100&ts=1&";
 
@@ -23,8 +24,15 @@ function App() {
 
 
     const inputHandler = (e) => {
+        setStartLetter('');
 
-        let ch = e.target.value;
+        console.log('SHOULD BE empty ', startLetter);
+
+        // let ch = e.target.value;
+        let ch = e.target.value.slice(-1);
+
+        console.log(" ch is >>  ", ch)
+        console.log(" e.target ", e.target);
 
         if (ch.match(/^[a-z]+$/i) !== null){
         
@@ -32,13 +40,13 @@ function App() {
     
         }
 
-        console.log(" startLetter ", startLetter);
+        console.log(" >>>>>>>>>>>> startLetter ", startLetter);
     }
 
 
     useEffect( () => {
 
-        setStartLetter(startLetter);
+        // setStartLetter(startLetter);
 
         fetch(url)
         // fetch(`"${process.env.REACT_APP_URL}"`)
@@ -61,29 +69,31 @@ function App() {
     
     
     
-    }, [url, startLetter])
+    }, [url])
  
 
-    useEffect( () => {
+    // useEffect( () => {
     
-        if(charData) {
-            // console.log(charData.data.results)
-            console.log(charData);
+    //     if(charData) {
+    //         // console.log(charData.data.results)
+    //         console.log("charData >> ", charData);
         
-        }
+    //     }
 
     
-    }, [charData])
+    // }, [charData])
 
 
 
   return (
     <div className="App">
        <h1> Marvel API exp </h1>
+       <div> {startLetter} </div>
+       <ClickBar setStartLetter = {setStartLetter} />
 
     <input
         type = "text"
-        // maxLength = {1}
+        // maxLength = {2}
         value = {startLetter.slice(-1)}
         onChange = { (e) => inputHandler(e)}
     ></input>
