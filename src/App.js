@@ -86,39 +86,37 @@ function App() {
     console.log(" DATA ", charData);
 
   return (
-    <div className="App">
-       <h1> Marvel API exp </h1>
-       <div> {startLetter} </div>
-       <ClickBar setStartLetter = {setStartLetter} />
+    <div>
+        <div className = 'header-container'>
+            <h1> Marvel API exp </h1>
+            {/* <div> {startLetter} </div> */}
+            <ClickBar setStartLetter = {setStartLetter} />
 
-    <input
-        type = "text"
-        // maxLength = {2}
-        value = {startLetter.slice(-1)}
-        onChange = { (e) => inputHandler(e)}
-    ></input>
-
-
-    {charData && charData.data.results.map ( (char) => {
-        return (
-            <div 
-                key = {char.id}
-                style = {{width: '10px'}}
-                
-                >
-                <div> {char.name} </div>
-                <img src = {char.thumbnail.path + '.' + char.thumbnail.extension} alt = {char.name}/>
-            
-            
-            
-            </div>
-        
-        
-        )
+            <input
+                className = 'search-container'
+                type = "text"
+                // maxLength = {2}
+                value = {startLetter.slice(-1)}
+                onChange = { (e) => inputHandler(e)}
+            ></input>
+        </div>
     
-    
-    })}  
-    
+        <div className = 'main-char-container'>
+            {charData && charData.data.results.map ( (char) => {
+                return (
+                    <div 
+                        key = {char.id}
+                        className= 'main-card'
+                        >
+                        <div className = 'char-name'> {char.name} </div>
+                        <img 
+                            className = 'char-img'
+                            src = {char.thumbnail.path + '.' + char.thumbnail.extension} 
+                            alt = {char.name}/>
+                    </div>
+                )
+            })}    
+        </div>
 
     </div>
   );

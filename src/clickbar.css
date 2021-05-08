@@ -1,15 +1,18 @@
 .clickbox-container {
-    border: 1px solid green;
+    /* border: 1px solid black; */
     display: flex;
-    width: 600px;
-    margin: 0 auto;
+    width: 700px;
+    margin: 10px auto;
 
 
 }
 
 .charbox {
-    border: 1px solid pink;
+    /* border: 1px solid black; */
     width: 15px;
-    padding: 5px;
+    padding: 2px;
+    margin: 5px;
     cursor: pointer;
+    color: rgb(236, 226, 226);
+    font-weight: bold;
 }
