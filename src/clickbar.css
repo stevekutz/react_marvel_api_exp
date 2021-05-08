@@ -1,0 +1,15 @@
+.clickbox-container {
+    border: 1px solid green;
+    display: flex;
+    width: 600px;
+    margin: 0 auto;
+
+
+}
+
+.charbox {
+    border: 1px solid pink;
+    width: 15px;
+    padding: 5px;
+    cursor: pointer;
+}

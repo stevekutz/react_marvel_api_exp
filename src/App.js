@@ -26,7 +26,6 @@ function App() {
     const inputHandler = (e) => {
         setStartLetter('');
 
-        console.log('SHOULD BE empty ', startLetter);
 
         // let ch = e.target.value;
         let ch = e.target.value.slice(-1);
@@ -84,6 +83,7 @@ function App() {
     // }, [charData])
 
 
+    console.log(" DATA ", charData);
 
   return (
     <div className="App">
@@ -101,7 +101,17 @@ function App() {
 
     {charData && charData.data.results.map ( (char) => {
         return (
-            <div key = {char.id}>  {char.name} </div>
+            <div 
+                key = {char.id}
+                style = {{width: '10px'}}
+                
+                >
+                <div> {char.name} </div>
+                <img src = {char.thumbnail.path + '.' + char.thumbnail.extension} alt = {char.name}/>
+            
+            
+            
+            </div>
         
         
         )
