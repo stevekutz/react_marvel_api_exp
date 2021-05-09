@@ -1,11 +1,11 @@
 import React from 'react';
 
 import {createAlphaArray} from './Helper';
-import './clickbar.css';
+import './hoverbar.css';
 
 
 
-const ClickBar = ({setStartLetter}) => {
+const HoverBar = ({setStartLetter}) => {
 
     
 
@@ -45,4 +45,4 @@ const ClickBar = ({setStartLetter}) => {
 
 }
 
-export default ClickBar;
+export default HoverBar;

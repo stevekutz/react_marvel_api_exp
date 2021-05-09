@@ -9,7 +9,7 @@ h1 {
     width: 250px;
     margin: 10px auto;
     text-align: center;
-    color: rgb(238, 228, 228);
+    color: rgb(245, 239, 239);
 }
 
 .search-container {
@@ -44,7 +44,7 @@ h1 {
 }
 
 .char-name {
-    border: 1px solid yellow;
+    /* border: 1px solid yellow; */
     display: flex;
     font-weight: bold;
     margin: 5px;

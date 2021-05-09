@@ -1,8 +1,10 @@
 import logo from './logo.svg';
 import './App.css';
 import React, {useState, useEffect} from 'react';
+import useFetch from './useFetch';
 
-import ClickBar from './ClickBar';
+
+import HoverBar from './HoverBar';
 
 
 function App() {
@@ -13,19 +15,18 @@ function App() {
     const base_URL = "http://gateway.marvel.com/v1/public/characters?limit=100&ts=1&";
 
 
-    const [charData, setCharData] = useState("");
+    // const [charData, setCharData] = useState("");
     const [startLetter, setStartLetter] = useState('a');
 
-
-
-
     let url = base_URL + "nameStartsWith=" + startLetter.slice(-1) + process.env.REACT_APP_KEY + process.env.REACT_APP_HASH;
-    console.log(" url >>> ", url);
 
+    let {data: charData, isLoading, error} = useFetch(url)
+
+
+    console.log(" url >>> ", url);
+    console.log(" data ", charData);
 
     const inputHandler = (e) => {
-        setStartLetter('');
-
 
         // let ch = e.target.value;
         let ch = e.target.value.slice(-1);
@@ -40,47 +41,8 @@ function App() {
         }
 
         console.log(" >>>>>>>>>>>> startLetter ", startLetter);
+
     }
-
-
-    useEffect( () => {
-
-        // setStartLetter(startLetter);
-
-        fetch(url)
-        // fetch(`"${process.env.REACT_APP_URL}"`)
-            .then(res => {
-                if(!res.ok) {
-                    console.log(" Status Code ", res.status);
-                    throw Error(' Error with Request');
-                }
-            return res.json();    
-            })
-            .then(data => {
-                setCharData(data)
-            
-            })
-            .catch(err => {
-                console.log('ERROR CAUGHT ', err)
-            
-            })
-    
-    
-    
-    
-    }, [url])
- 
-
-    // useEffect( () => {
-    
-    //     if(charData) {
-    //         // console.log(charData.data.results)
-    //         console.log("charData >> ", charData);
-        
-    //     }
-
-    
-    // }, [charData])
 
 
     console.log(" DATA ", charData);
@@ -90,7 +52,7 @@ function App() {
         <div className = 'header-container'>
             <h1> Marvel API exp </h1>
             {/* <div> {startLetter} </div> */}
-            <ClickBar setStartLetter = {setStartLetter} />
+            <HoverBar setStartLetter = {setStartLetter} />
 
             <input
                 className = 'search-container'
@@ -101,6 +63,9 @@ function App() {
             ></input>
         </div>
     
+
+        {isLoading ? <div style = {{height: '100vh'}}> LOADING ... </div> : 
+
         <div className = 'main-char-container'>
             {charData && charData.data.results.map ( (char) => {
                 return (
@@ -117,6 +82,8 @@ function App() {
                 )
             })}    
         </div>
+
+        }
 
     </div>
   );
