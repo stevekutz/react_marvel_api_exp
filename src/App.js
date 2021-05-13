@@ -38,7 +38,7 @@ function App() {
 
 
     // console.log(" url >>> ", url);
-    console.log(" data ", charData);
+    // console.log(" data ", charData);
 
     const inputHandler = (e) => {
 
@@ -47,19 +47,19 @@ function App() {
         // let ch = e.target.value;
         let ch = e.target.value.slice(-1);
 
-        console.log(" ch is >>  ", ch)
-        console.log(" e.target ", e.target);
+        // console.log(" ch is >>  ", ch)
+        // console.log(" e.target ", e.target);
 
         if (ch.match(/^[a-z]+$/i) !== null){
             let url = ''; 
             url = base_URL + '&nameStartsWith=' + ch;
-            console.log("startLetter change ")
+            // console.log("startLetter change ")
             setStartLetter(e.target.value);
             setBaseURL(url);
         }
 
 
-        console.log(" >>>>>>>>>>>> startLetter ", e.target.value);
+        // console.log(" >>>>>>>>>>>> startLetter ", e.target.value);
 
     }
 
@@ -71,7 +71,8 @@ function App() {
 
     const fullNameSearch = () => {
     
-        setBaseURL()
+        setBaseURL(base_URL + "&name=" + searchVal);
+        setSearchVal("");
     }
 
 
@@ -84,6 +85,8 @@ function App() {
     console.log("baseURL >> ", baseURL);
 
     // console.log(" DATA ", charData);
+
+    console.log(" searchVal ", searchVal);
 
   return (
     <div>
@@ -110,7 +113,9 @@ function App() {
                 value = {searchVal}
                 onChange = { (e) => searchHandler(e)}
             />
-            <button > Full Name Search </button>
+            <button 
+                onClick = {fullNameSearch}
+            > Full Name Search </button>
         </div>
     
 
