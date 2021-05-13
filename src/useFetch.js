@@ -3,6 +3,8 @@ import React, {useState, useEffect } from 'react';
 
 const useFetch = (url) => {
 
+    
+
     const [data, setData] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -22,9 +24,10 @@ const useFetch = (url) => {
         
             console.log('  isLoading >>>> ', isLoading);
 
-
+            console.log('useFetch url ', url + process.env.REACT_APP_KEY + process.env.REACT_APP_HASH)
             fetch(url + process.env.REACT_APP_KEY + process.env.REACT_APP_HASH)
             // fetch(`"${process.env.REACT_APP_URL}"`)
+            
                 .then(res => {
                     if(!res.ok) {
                         console.log(" Status Code ", res.status);
@@ -46,7 +49,7 @@ const useFetch = (url) => {
         
         
         
-        }, 6000);
+        }, 1000);
     
     
     

@@ -16,3 +16,13 @@
     color: rgb(236, 226, 226);
     font-weight: bold;
 }
+
+.full-search-container {
+    border: 1px solid blue;
+    
+    width: 150px;
+    margin: 10px;
+    border-radius: 5px;
+    text-align: center;
+    outline-style: none;
+}

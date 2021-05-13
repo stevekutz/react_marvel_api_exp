@@ -5,7 +5,7 @@ import './clickbar.css';
 
 
 
-const ClickBar = ({setStartLetter, setLetterChange}) => {
+const ClickBar = ({setStartLetter}) => {
 
     
 
@@ -24,7 +24,6 @@ const ClickBar = ({setStartLetter, setLetterChange}) => {
                     className = 'charbox'
                     // onMouseEnter = {() => setStartLetter(ch.lower)}
                     onClick = {() => setStartLetter(ch.lower)}
-                    // onClick = {() => setLetterChange(true)}
                     
                     > {ch.upper} 
                 </p>

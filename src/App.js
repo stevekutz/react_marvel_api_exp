@@ -16,22 +16,34 @@ function App() {
     // console.log(' secret ', process.env.REACT_APP_SECRET);
     // console.log(' key ', process.env.REACT_APP_KEY);
 
-    const base_URL = "http://gateway.marvel.com/v1/public/characters?limit=100&ts=1&";
+    const base_URL = "http://gateway.marvel.com/v1/public/characters?limit=100&ts=1";
 
 
     // const [charData, setCharData] = useState("");
     const [startLetter, setStartLetter] = useState('a');
-
-    let url = base_URL + "nameStartsWith=" + startLetter.slice(-1);
-
-    const {data: charData, isLoading, error} = useFetch(url, startLetter)
+    const [searchVal, setSearchVal] = useState('');
+    const [baseURL, setBaseURL] = useState(base_URL + "&nameStartsWith=" + startLetter.slice(-1))
 
 
-    console.log(" url >>> ", url);
-    // console.log(" data ", charData);
+    const {data: charData, isLoading, error} = useFetch(baseURL);
+    useEffect( () => {
+        setBaseURL(base_URL + "&nameStartsWith=" + startLetter.slice(-1))
+    
+    }, [startLetter])
+
+    // let url = base_URL + "&nameStartsWith=" + startLetter.slice(-1);
+    // let url = baseURL;
+
+    // const {data: charData, isLoading, error} = useFetch(url);
+
+
+    // console.log(" url >>> ", url);
+    console.log(" data ", charData);
 
     const inputHandler = (e) => {
 
+
+        setBaseURL('');    
         // let ch = e.target.value;
         let ch = e.target.value.slice(-1);
 
@@ -39,15 +51,29 @@ function App() {
         console.log(" e.target ", e.target);
 
         if (ch.match(/^[a-z]+$/i) !== null){
-        
+            let url = ''; 
+            url = base_URL + '&nameStartsWith=' + ch;
             console.log("startLetter change ")
             setStartLetter(e.target.value);
-
+            setBaseURL(url);
         }
 
-        console.log(" >>>>>>>>>>>> startLetter ", startLetter);
+
+        console.log(" >>>>>>>>>>>> startLetter ", e.target.value);
 
     }
+
+    const searchHandler = (e) => {
+    
+        setSearchVal(e.target.value)
+    
+    }
+
+    const fullNameSearch = () => {
+    
+        setBaseURL()
+    }
+
 
     // useEffect ( () => {
     
@@ -55,25 +81,36 @@ function App() {
     
     // }, [startLetter])
 
+    console.log("baseURL >> ", baseURL);
 
     // console.log(" DATA ", charData);
 
   return (
     <div>
         <div className = 'header-container'>
-            <h1> Marvel API exp {isLoading.toString()}</h1>
-            {/* <div> {startLetter} </div> */}
-            <ClickBar 
-                setStartLetter = {setStartLetter} 
-            />
+            <h1> Marvel API exp </h1>
 
+
+            {/* <div> {startLetter} </div> */}
             <input
                 className = 'search-container'
                 type = "text"
                 // maxLength = {2}
                 value = {startLetter.slice(-1)}
                 onChange = { (e) => inputHandler(e)}
-            ></input>
+            />
+
+
+            <ClickBar 
+                setStartLetter = {setStartLetter} 
+            />
+
+            <input 
+                className = 'full-search-container'
+                value = {searchVal}
+                onChange = { (e) => searchHandler(e)}
+            />
+            <button > Full Name Search </button>
         </div>
     
 
