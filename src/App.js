@@ -10,16 +10,6 @@ import useFetch from './useFetch';
 
 import ClickBar from './comp/ClickBar';
 
-const override = css`
-    border: 1px solid blue;
-    display: flex;
-    height: 100vh;
-    justifyContent: center;
-    margin: calc(100vh/4) auto;
-    alignContent: center;
-    // padding: 0 calc((100vw/2) + 500)px
-    width; 100px;
-`;
 
 function App() {
 
@@ -88,9 +78,8 @@ function App() {
     
 
         {isLoading ? 
-            <div> 
-                <SyncLoader css = {override} color = {'red'} loading = {isLoading} size = {50}/>
-                Loading ....
+            <div className = 'loader'> 
+                <SyncLoader color = {'red'} loading = {isLoading} size = {50}/>
             </div> : 
 
 
