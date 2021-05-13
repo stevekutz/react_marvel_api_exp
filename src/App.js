@@ -1,11 +1,25 @@
 import logo from './logo.svg';
 import './App.css';
 import React, {useState, useEffect} from 'react';
+import {css} from "@emotion/react";
+import SyncLoader from "react-spinners/SyncLoader";
+import ClipLoader from "react-spinners/ClipLoader";
+
 import useFetch from './useFetch';
 
 
-import HoverBar from './HoverBar';
+import ClickBar from './comp/ClickBar';
 
+const override = css`
+    border: 1px solid blue;
+    display: flex;
+    height: 100vh;
+    justifyContent: center;
+    margin: calc(100vh/4) auto;
+    alignContent: center;
+    // padding: 0 calc((100vw/2) + 500)px
+    width; 100px;
+`;
 
 function App() {
 
@@ -18,13 +32,13 @@ function App() {
     // const [charData, setCharData] = useState("");
     const [startLetter, setStartLetter] = useState('a');
 
-    let url = base_URL + "nameStartsWith=" + startLetter.slice(-1) + process.env.REACT_APP_KEY + process.env.REACT_APP_HASH;
+    let url = base_URL + "nameStartsWith=" + startLetter.slice(-1);
 
-    let {data: charData, isLoading, error} = useFetch(url)
+    const {data: charData, isLoading, error} = useFetch(url, startLetter)
 
 
     console.log(" url >>> ", url);
-    console.log(" data ", charData);
+    // console.log(" data ", charData);
 
     const inputHandler = (e) => {
 
@@ -36,23 +50,32 @@ function App() {
 
         if (ch.match(/^[a-z]+$/i) !== null){
         
+            console.log("startLetter change ")
             setStartLetter(e.target.value);
-    
+
         }
 
         console.log(" >>>>>>>>>>>> startLetter ", startLetter);
 
     }
 
+    // useEffect ( () => {
+    
+    //     console.log("start letter updated")
+    
+    // }, [startLetter])
 
-    console.log(" DATA ", charData);
+
+    // console.log(" DATA ", charData);
 
   return (
     <div>
         <div className = 'header-container'>
-            <h1> Marvel API exp </h1>
+            <h1> Marvel API exp {isLoading.toString()}</h1>
             {/* <div> {startLetter} </div> */}
-            <HoverBar setStartLetter = {setStartLetter} />
+            <ClickBar 
+                setStartLetter = {setStartLetter} 
+            />
 
             <input
                 className = 'search-container'
@@ -64,7 +87,13 @@ function App() {
         </div>
     
 
-        {isLoading ? <div style = {{height: '100vh'}}> LOADING ... </div> : 
+        {isLoading ? 
+            <div> 
+                <SyncLoader css = {override} color = {'red'} loading = {isLoading} size = {50}/>
+                Loading ....
+            </div> : 
+
+
 
         <div className = 'main-char-container'>
             {charData && charData.data.results.map ( (char) => {

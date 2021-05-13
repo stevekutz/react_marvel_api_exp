@@ -3,19 +3,27 @@ import React, {useState, useEffect } from 'react';
 
 const useFetch = (url) => {
 
-    const [data, setData] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
+    const [data, setData] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
+
+    // const [data, setData] = useState(null);
+    // const [isLoading, setIsLoading] = useState(true);
+    // const [error, setError] = useState(null);
 
 
     useEffect( () => {
 
         // setStartLetter(startLetter);
-
+        // const abortCont = new AbortController();
+        setIsLoading(true);
 
         setTimeout( () => {
         
-            fetch(url)
+            console.log('  isLoading >>>> ', isLoading);
+
+
+            fetch(url + process.env.REACT_APP_KEY + process.env.REACT_APP_HASH)
             // fetch(`"${process.env.REACT_APP_URL}"`)
                 .then(res => {
                     if(!res.ok) {
@@ -25,8 +33,8 @@ const useFetch = (url) => {
                 return res.json();    
                 })
                 .then(data => {
-                    setData(data)
                     setIsLoading(false);
+                    setData(data)
                     setError(null)
                 })
                 .catch(err => {
@@ -38,16 +46,15 @@ const useFetch = (url) => {
         
         
         
-        
-        }, 4000);
+        }, 6000);
     
     
     
     
     }, [url])
 
-
-    return {data, isLoading, error}
+    return { data, isLoading, error };
+    // return {data, isLoading, error}
 
 }
 
