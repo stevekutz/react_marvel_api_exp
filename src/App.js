@@ -9,6 +9,7 @@ import useFetch from './useFetch';
 
 
 import ClickBar from './comp/ClickBar';
+import NotFound from './comp/NotFound';
 
 
 function App() {
@@ -21,7 +22,7 @@ function App() {
 
     // const [charData, setCharData] = useState("");
     const [startLetter, setStartLetter] = useState('a');
-    const [searchVal, setSearchVal] = useState('');
+    const [searchFullName, setSearchFullName] = useState('');
     const [currentURL, setCurrentURL] = useState(base_URL + "&nameStartsWith=" + startLetter.slice(-1))
 
 
@@ -66,15 +67,15 @@ function App() {
 
     const searchHandler = (e) => {
     
-        setSearchVal(e.target.value)
+        setSearchFullName(e.target.value)
     
     }
 
     const fullNameSearch = () => {
     
-        setCurrentURL(base_URL + "&name=" + searchVal);
-        // setStartLetter(searchVal[0]);
-        // setSearchVal("");
+        setCurrentURL(base_URL + "&name=" + searchFullName);
+        // setStartLetter(searchFullName[0]);
+        // setSearchFullName("");
     }
 
 
@@ -88,7 +89,7 @@ function App() {
 
     console.log(" DATA ", charData);
 
-    console.log(" searchVal ", searchVal);
+    console.log(" searchFullName ", searchFullName);
 
     console.log(" error ========> ", error);
 
@@ -114,7 +115,7 @@ function App() {
 
             <input 
                 className = 'full-search-container'
-                value = {searchVal}
+                value = {searchFullName}
                 onChange = { (e) => searchHandler(e)}
             />
             <button 
@@ -128,15 +129,15 @@ function App() {
                 <SyncLoader color = {'red'} loading = {isLoading} size = {50}/>
             </div> : 
 
-            <div> 
+            <div className = 'results-main-container'> 
                 {error ? 
                     <div>  Error: {error}</div>
                 :
-                    <div className = 'main-char-container'>
+                    <div>
                         {charData && charData.data.count === 0 ? 
-                            <div> {searchVal} NOT FOUND </div>
+                            <NotFound searchFullName = {searchFullName} />
                             : 
-                            <div>
+                            <div className = 'main-char-container'>
                             {charData && charData.data.results.map ( (char) => {
                                 return (
                                     <div 

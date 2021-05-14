@@ -1,0 +1,25 @@
+.notfound-main-container {
+    border: 1px solid green;
+    
+    /* width: 80%; */
+    /* display: flex; */
+    /* justify-content: center; */
+    margin: 10px auto;
+
+}
+
+.not-found-name-container {
+    border: 1px solid yellow;
+
+
+    color: blue;
+
+
+}
+
+.name {
+
+    color: black;
+    font-weight: bold;
+
+}
