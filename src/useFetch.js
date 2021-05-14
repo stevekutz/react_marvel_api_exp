@@ -1,4 +1,4 @@
-import React, {useState, useEffect } from 'react';
+import {useState, useEffect } from 'react';
 
 
 const useFetch = (url) => {
@@ -17,7 +17,7 @@ const useFetch = (url) => {
     useEffect( () => {
 
         // setStartLetter(startLetter);
-        // const abortCont = new AbortController();
+        const abortCont = new AbortController();
         setIsLoading(true);
 
         setTimeout( () => {
@@ -25,13 +25,14 @@ const useFetch = (url) => {
             console.log('  isLoading >>>> ', isLoading);
 
             console.log('useFetch url ', url + process.env.REACT_APP_KEY + process.env.REACT_APP_HASH)
+            // fetch(url + process.env.REACT_APP_KEY + process.env.REACT_APP_HASH, {signal: abortCont.signal})
             fetch(url + process.env.REACT_APP_KEY + process.env.REACT_APP_HASH)
             // fetch(`"${process.env.REACT_APP_URL}"`)
             
                 .then(res => {
                     if(!res.ok) {
                         console.log(" Status Code ", res.status);
-                        throw Error(' Error with Request');
+                        throw Error(' Error with Network Request');
                     }
                 return res.json();    
                 })
@@ -52,7 +53,7 @@ const useFetch = (url) => {
         }, 1000);
     
     
-    
+        return () => abortCont.abort();
     
     }, [url])
 

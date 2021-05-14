@@ -21,6 +21,7 @@ const ClickBar = ({setStartLetter}) => {
         {alphaArr.map((ch) => {
             return (
                 <p 
+                    key = {ch.lower}
                     className = 'charbox'
                     // onMouseEnter = {() => setStartLetter(ch.lower)}
                     onClick = {() => setStartLetter(ch.lower)}

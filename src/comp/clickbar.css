@@ -13,16 +13,16 @@
     padding: 2px;
     margin: 5px;
     cursor: pointer;
-    color: rgb(236, 226, 226);
+    color: rgb(245, 239, 239);
     font-weight: bold;
 }
 
 .full-search-container {
-    border: 1px solid blue;
+    border: 1px solid black;
     
     width: 150px;
     margin: 10px;
-    border-radius: 5px;
+    border-radius: 5px 5px;
     text-align: center;
     outline-style: none;
 }

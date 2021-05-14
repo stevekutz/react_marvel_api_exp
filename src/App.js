@@ -1,9 +1,9 @@
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
 import React, {useState, useEffect} from 'react';
-import {css} from "@emotion/react";
+// import {css} from "@emotion/react";
 import SyncLoader from "react-spinners/SyncLoader";
-import ClipLoader from "react-spinners/ClipLoader";
+// import ClipLoader from "react-spinners/ClipLoader";
 
 import useFetch from './useFetch';
 
@@ -22,17 +22,18 @@ function App() {
     // const [charData, setCharData] = useState("");
     const [startLetter, setStartLetter] = useState('a');
     const [searchVal, setSearchVal] = useState('');
-    const [baseURL, setBaseURL] = useState(base_URL + "&nameStartsWith=" + startLetter.slice(-1))
+    const [currentURL, setCurrentURL] = useState(base_URL + "&nameStartsWith=" + startLetter.slice(-1))
 
 
-    const {data: charData, isLoading, error} = useFetch(baseURL);
+    const {data: charData, isLoading, error} = useFetch(currentURL);
+
     useEffect( () => {
-        setBaseURL(base_URL + "&nameStartsWith=" + startLetter.slice(-1))
+        setCurrentURL(base_URL + "&nameStartsWith=" + startLetter.slice(-1))
     
     }, [startLetter])
 
     // let url = base_URL + "&nameStartsWith=" + startLetter.slice(-1);
-    // let url = baseURL;
+    // let url = currentURL;
 
     // const {data: charData, isLoading, error} = useFetch(url);
 
@@ -43,7 +44,7 @@ function App() {
     const inputHandler = (e) => {
 
 
-        setBaseURL('');    
+        setCurrentURL('');    
         // let ch = e.target.value;
         let ch = e.target.value.slice(-1);
 
@@ -55,7 +56,7 @@ function App() {
             url = base_URL + '&nameStartsWith=' + ch;
             // console.log("startLetter change ")
             setStartLetter(e.target.value);
-            setBaseURL(url);
+            setCurrentURL(url);
         }
 
 
@@ -71,8 +72,9 @@ function App() {
 
     const fullNameSearch = () => {
     
-        setBaseURL(base_URL + "&name=" + searchVal);
-        setSearchVal("");
+        setCurrentURL(base_URL + "&name=" + searchVal);
+        // setStartLetter(searchVal[0]);
+        // setSearchVal("");
     }
 
 
@@ -82,11 +84,13 @@ function App() {
     
     // }, [startLetter])
 
-    console.log("baseURL >> ", baseURL);
+    console.log("currentURL >> ", currentURL);
 
-    // console.log(" DATA ", charData);
+    console.log(" DATA ", charData);
 
     console.log(" searchVal ", searchVal);
+
+    console.log(" error ========> ", error);
 
   return (
     <div>
@@ -124,24 +128,43 @@ function App() {
                 <SyncLoader color = {'red'} loading = {isLoading} size = {50}/>
             </div> : 
 
+            <div> 
+                {error ? 
+                    <div>  Error: {error}</div>
+                :
+                    <div className = 'main-char-container'>
+                        {charData && charData.data.count === 0 ? 
+                            <div> {searchVal} NOT FOUND </div>
+                            : 
+                            <div>
+                            {charData && charData.data.results.map ( (char) => {
+                                return (
+                                    <div 
+                                        key = {char.id}
+                                        className= 'main-card'
+                                        >
+                                        <div className = 'char-name'> {char.name} </div>
+                                        <img 
+                                            className = 'char-img'
+                                            src = {char.thumbnail.path + '.' + char.thumbnail.extension} 
+                                            alt = {char.name}/>
+                                    </div>
+                                )
+                            })}    
+                            </div>
+                        
+                        }
 
-
-        <div className = 'main-char-container'>
-            {charData && charData.data.results.map ( (char) => {
-                return (
-                    <div 
-                        key = {char.id}
-                        className= 'main-card'
-                        >
-                        <div className = 'char-name'> {char.name} </div>
-                        <img 
-                            className = 'char-img'
-                            src = {char.thumbnail.path + '.' + char.thumbnail.extension} 
-                            alt = {char.name}/>
                     </div>
-                )
-            })}    
-        </div>
+
+                }
+
+            
+            </div>
+
+
+
+            
 
         }
 
