@@ -1,13 +1,15 @@
 import './notfound.css';
 
 
-const NotFound = ({searchFullName}) => {
+const NotFound = ({recentSearch}) => {
 
     return (
         <div className = 'notfound-main-container'>
             <div className = 'not-found-name-container'> 
-            
-                <span className = 'name'> {searchFullName} </span>  not found </div>
+                The full name: 
+                <span className = 'name'> {recentSearch} </span>  
+                
+                was not found </div>
         
         </div>
     )

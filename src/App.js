@@ -23,6 +23,8 @@ function App() {
     // const [charData, setCharData] = useState("");
     const [startLetter, setStartLetter] = useState('a');
     const [searchFullName, setSearchFullName] = useState('');
+    const [recentSearch, setRecentSearch] = useState('');
+    const [includeImageNotFound, setIncludeImageNotFound] = useState('true');
     const [currentURL, setCurrentURL] = useState(base_URL + "&nameStartsWith=" + startLetter.slice(-1))
 
 
@@ -31,7 +33,7 @@ function App() {
     useEffect( () => {
         setCurrentURL(base_URL + "&nameStartsWith=" + startLetter.slice(-1))
     
-    }, [startLetter])
+    }, [startLetter, searchFullName])
 
     // let url = base_URL + "&nameStartsWith=" + startLetter.slice(-1);
     // let url = currentURL;
@@ -67,15 +69,20 @@ function App() {
 
     const searchHandler = (e) => {
     
-        setSearchFullName(e.target.value)
-    
+        setSearchFullName(e.target.value);
     }
 
     const fullNameSearch = () => {
-    
+
+        setRecentSearch(searchFullName);
         setCurrentURL(base_URL + "&name=" + searchFullName);
         // setStartLetter(searchFullName[0]);
         // setSearchFullName("");
+    }
+
+    const toggleIncludeNoImageFound = () => {
+        setIncludeImageNotFound(!includeImageNotFound)
+    
     }
 
 
@@ -113,11 +120,27 @@ function App() {
                 setStartLetter = {setStartLetter} 
             />
 
+            <label htmlFor  = 'no_image'>
+                <input 
+                    id = 'no_image'
+                    htmlFor = 'no_image'
+                    type = 'checkbox'
+                    value = {includeImageNotFound}
+                    onChange = {toggleIncludeNoImageFound}
+                    
+                />
+
+            Include Image Not Found
+            </label>
+
+
             <input 
+                type = 'text'
                 className = 'full-search-container'
                 value = {searchFullName}
                 onChange = { (e) => searchHandler(e)}
             />
+
             <button 
                 onClick = {fullNameSearch}
             > Full Name Search </button>
@@ -135,23 +158,49 @@ function App() {
                 :
                     <div>
                         {charData && charData.data.count === 0 ? 
-                            <NotFound searchFullName = {searchFullName} />
+                            <NotFound 
+                                recentSearch = {recentSearch} 
+
+                            />
                             : 
                             <div className = 'main-char-container'>
-                            {charData && charData.data.results.map ( (char) => {
-                                return (
-                                    <div 
-                                        key = {char.id}
-                                        className= 'main-card'
-                                        >
-                                        <div className = 'char-name'> {char.name} </div>
-                                        <img 
-                                            className = 'char-img'
-                                            src = {char.thumbnail.path + '.' + char.thumbnail.extension} 
-                                            alt = {char.name}/>
-                                    </div>
-                                )
-                            })}    
+                            {charData && charData.data.results
+                                    
+
+                                .filter( (char) => {
+                                    if(char.thumbnail.path.toString().includes('not')  && includeImageNotFound) {
+                                        // console.log(" char name with NO IMAGE  ", char.name);
+                                        // return char
+                                    } else {
+                                        // console.log(" char IMAGE EXISTS >>>>" , char.thumbnail.path.toString().includes('not'));
+                                        return char
+                                    }
+                                    
+
+                                })
+                                
+                                
+                                .map ( (char) => {
+                                    return (
+                                        <div 
+                                            key = {char.id}
+                                            className= 'main-card'
+                                            >
+                                            <div className = 'char-name'> {char.name} </div>
+                                            <div className = 'image-container'> 
+                                                <img 
+                                                    className = 'char-img'
+                                                    src = {char.thumbnail.path + '.' + char.thumbnail.extension} 
+                                                    alt = {char.name}
+                                                />
+                                            </div>
+                                        </div>
+                                    )
+                                })
+                               
+                            }    
+                            
+                            
                             </div>
                         
                         }
