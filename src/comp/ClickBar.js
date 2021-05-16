@@ -5,7 +5,7 @@ import './clickbar.css';
 
 
 
-const ClickBar = ({setStartLetter}) => {
+const ClickBar = ({setStartLetter, setSearchFullName}) => {
 
     
 
@@ -15,7 +15,7 @@ const ClickBar = ({setStartLetter}) => {
 
     return (
 
-    <div className = 'clickbox-container'>
+    <div className = 'clickbox-container' onClick = {() => setSearchFullName('')}>
 
         
         {alphaArr.map((ch) => {

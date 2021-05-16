@@ -6,7 +6,7 @@
 
 h1 {
     /* border: 10px solid blue; */
-    width: 250px;
+    width: 450px;
     margin: 10px auto;
     text-align: center;
     color: rgb(245, 239, 239);
@@ -14,29 +14,55 @@ h1 {
 
 .checkbox_not_found {
     background-color: black;
-
-
 }
 
 
 .edit-results-container {
-    border: 1px solid white;
+    /* border: 3px solid rgb(235, 223, 223); */
+    border-radius: 4px;
 
-    width: 70%;
     display: flex;
     justify-content: space-between;
-    align-items: center;
     margin: 10px auto;
+    width: 50%;
+}
+
+.filter-results-container {
+    /* border: 2px solid black; */
+    border-radius: 5px;
+
+    color: rgb(238, 232, 232);
+    /* font-weight: bold; */
+    width: 40%;
+    display: flex;
+    justify-content: space-around;
+    /* align-items: center; */
+    margin: 5px auto;
 
 }
 
+.fullname-search-container {
+    /* border: 2px solid black; */
+    border-radius: 5px;
+    
+    width: 50%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 5px auto;
 
+}
 
+.fullname-search-button {
+    border: 1px solid rgb(49, 47, 47);
+    background-color: rgb(196, 186, 186);
+    border-radius: 4px;
+}
 
 .search-input {
     border: 1px solid black;
     width: 25px;
-    margin: 10px;
+    margin: 2px;
     border-radius: 5px;
     text-align: center;
     outline-style: none;
@@ -54,7 +80,7 @@ h1 {
 
 .filtered-results-input {
     border: 1px solid black;
-    width: 150px;
+    width: 100px;
     margin: 10px;
     border-radius: 5px;
     text-align: center;
@@ -65,13 +91,17 @@ h1 {
 .results-main-container {
     /* border: 1px solid red; */
     display: flex;
+    height: 100vh;
     justify-content: center;
+    background-color: rgb(248, 244, 244);
 
 }
 
 .main-char-container {
-    border: 1px solid blue;
-    
+    /* border: 1px solid blue; */
+    background-color: white;
+    border-radius: 10px;
+
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -81,7 +111,8 @@ h1 {
 }
 
 .main-card {
-    border: 5px solid red;
+    border: 3px solid red;
+    border-radius: 4px;
     width: 250px;
     height: 300px;
     /* width: 15%; */
@@ -141,4 +172,21 @@ h1 {
     /* margin: 5px; */
 
 
+}
+
+@media screen and (max-width: 600px) {
+    .edit-results-container {
+        width: 70%;
+        flex-direction: column;
+        margin: 2px auto;
+    }
+
+    .filter-results-container, .fullname-search-container {
+        width: 90%;
+        margin: 0px auto;
+    }
+
+    .char-count {
+        width: 40%;
+    }
 }

@@ -2,10 +2,11 @@
     /* border: 1px solid black; */
     display: flex;
     width: 700px;
-    margin: 10px auto;
+    margin: 2px auto;
 
 
 }
+
 
 .charbox {
     /* border: 1px solid black; */
@@ -17,6 +18,21 @@
     font-weight: bold;
 }
 
+@media screen and (max-width: 700px) {
+    .clickbox-container{
+        width: 340px;
+        flex-wrap: wrap;
+    }
+    
+    .charbox{
+        /* color: green; */
+        margin: 3px;
+    }
+
+    
+
+
+}
 .full-search-container {
     border: 1px solid black;
     

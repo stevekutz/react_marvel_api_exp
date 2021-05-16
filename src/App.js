@@ -47,6 +47,7 @@ function App() {
 
         if (ch.match(/^[a-z]+$/i) !== null){
             setStartLetter(e.target.value);
+            setSearchFullName('');
         }
 
 
@@ -64,10 +65,14 @@ function App() {
 
     const fullNameSearch = () => {
 
-        setRecentSearch(searchFullName);
-        setCurrentURL(base_URL + "&name=" + searchFullName);
-        // setStartLetter(searchFullName[0]);
-        // setSearchFullName("");
+        if(searchFullName.length !== 0) {
+            setRecentSearch(searchFullName);
+            setCurrentURL(base_URL + "&name=" + searchFullName);
+            // setStartLetter(searchFullName[0]);
+            // setSearchFullName("");
+        
+        
+        }
     }
 
     const toggleIncludeNoImageFound = () => {
@@ -106,8 +111,8 @@ function App() {
   return (
     <div>
         <div className = 'header-container'>
-            <h1> Marvel API exp  </h1>
-            <h2> renders: {countRenders.current} </h2>
+            <h1> Marvel API exp</h1>
+            <div> renders: {countRenders.current} </div>
 
 
             
@@ -122,6 +127,7 @@ function App() {
             
             <ClickBar 
                 setStartLetter = {setStartLetter} 
+                setSearchFullName = {setSearchFullName}
             />
             
 
@@ -139,32 +145,33 @@ function App() {
             Include Image Not Found
             </label>
 
-
             <div className = 'edit-results-container'>
-                <label htmlFor = 'filter'> Filter Results
-                    <input 
-                        id = 'filter'
-                        type = 'text'
-                        className = 'filtered-results-input'
-                        value = {filteredResults}
-                        onChange = {filterResultsHandler}
-                    />            
-                
-                
-                
-                </label>
-            
-            
-                <input 
-                    type = 'text'
-                    className = 'full-search-input'
-                    value = {searchFullName}
-                    onChange = { (e) => searchHandler(e)}
-                />
+                <div className = 'filter-results-container'>
+                    <label htmlFor = 'filter'>
+                        <input 
+                            id = 'filter'
+                            type = 'text'
+                            className = 'filtered-results-input'
+                            value = {filteredResults}
+                            onChange = {filterResultsHandler}
+                        />                            
+                    Filter Results  </label>
+                </div>
 
-                <button 
-                    onClick = {fullNameSearch}
-                > Full Name Search </button>
+
+                <div className = 'fullname-search-container'>
+                    <input 
+                        type = 'text'
+                        className = 'full-search-input'
+                        value = {searchFullName}
+                        onChange = { (e) => searchHandler(e)}
+                    />
+
+                    <button 
+                        className = 'fullname-search-button'
+                        onClick = {fullNameSearch}
+                    > Full Name Search </button>
+                </div>    
             </div>
 
 
@@ -175,7 +182,7 @@ function App() {
 
         {isLoading ? 
             <div className = 'loader'> 
-                <SyncLoader color = {'red'} loading = {isLoading} size = {50}/>
+                <SyncLoader color = {'red'} loading = {isLoading} size = {25}/>
             </div> : 
 
             <div className = 'results-main-container'> 
