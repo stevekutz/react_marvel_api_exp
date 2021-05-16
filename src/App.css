@@ -12,7 +12,19 @@ h1 {
     color: rgb(245, 239, 239);
 }
 
-.search-container {
+.edit-results-container {
+    border: 1px solid white;
+
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px auto;
+
+}
+
+
+.search-container, .full-search-container {
     border: 1px solid black;
     width: 25px;
     margin: 10px;
@@ -85,8 +97,8 @@ h1 {
 }
 
 .char-count {
-    border: 2px solid rgb(117, 105, 105);
-    border: 2px solid rgb(139, 135, 135);
+    border: 2px solid rgb(49, 47, 47);
+    /* border: 2px solid rgb(139, 135, 135); */
     border-radius: 5px;
     width: 20%;
     margin: 10px auto;
@@ -94,8 +106,8 @@ h1 {
     /* display: flex;
     justify-content: center; */
 
-    color: rgb(230, 43, 43);
-    background: rgb(44, 40, 40);
+    color: rgba(255, 0, 0, 0.986);
+    background: rgb(216, 212, 212);
     font-weight: bold;
     /* margin: 5px; */
 

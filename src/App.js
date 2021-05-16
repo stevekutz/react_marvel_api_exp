@@ -31,7 +31,7 @@ function App() {
 
     const countItems = useRef(0);
     const countRenders = useRef(0);
-    const [filteredChar, setFilteredChar] = useState([]);
+    const [filteredResults, setFilteredResults] = useState([]);
 
     
 
@@ -50,6 +50,11 @@ function App() {
         }
 
 
+    }
+
+    const filterResultsHandler = (e) => {
+        setFilteredResults(e.target.value)
+    
     }
 
     const searchHandler = (e) => {
@@ -133,16 +138,33 @@ function App() {
             </label>
 
 
-            <input 
-                type = 'text'
-                className = 'full-search-container'
-                value = {searchFullName}
-                onChange = { (e) => searchHandler(e)}
-            />
+            <div className = 'edit-results-container'>
+                <label htmlFor = 'filter'> Filter Results
+                    <input 
+                        id = 'filter'
+                        type = 'text'
+                        className = 'filtered-results-container'
+                        value = {filteredResults}
+                        onChange = {filterResultsHandler}
+                    />            
+                
+                
+                
+                </label>
+            
+            
+                <input 
+                    type = 'text'
+                    className = 'full-search-container'
+                    value = {searchFullName}
+                    onChange = { (e) => searchHandler(e)}
+                />
 
-            <button 
-                onClick = {fullNameSearch}
-            > Full Name Search </button>
+                <button 
+                    onClick = {fullNameSearch}
+                > Full Name Search </button>
+            </div>
+
 
             <div className = 'char-count'> Total Located: {charCount} </div>
         </div>
@@ -178,6 +200,8 @@ function App() {
                                 }
 
                             })
+
+                        
 
                             .map ( (char, index, arr) => {
                             
