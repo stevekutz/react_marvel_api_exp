@@ -1,6 +1,6 @@
 // import logo from './logo.svg';
 import './App.css';
-import React, {useState, useEffect, useRef, useCallback} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 // import {css} from "@emotion/react";
 import SyncLoader from "react-spinners/SyncLoader";
 // import ClipLoader from "react-spinners/ClipLoader";
@@ -31,11 +31,11 @@ function App() {
 
     const countItems = useRef(0);
     const countRenders = useRef(0);
-    const [filteredResults, setFilteredResults] = useState([]);
+    const [filteredResults, setFilteredResults] = useState('');
 
     
 
-    const {data: charData, isLoading, error} = useFetch(currentURL);
+    const {data: charData, isLoading, error} = useFetch(currentURL, startLetter);
 
     const inputHandler = (e) => {
 
@@ -78,7 +78,7 @@ function App() {
     useEffect( () => {
         setCurrentURL(base_URL + "&nameStartsWith=" + startLetter.slice(-1))
     
-    }, [startLetter, setStartLetter])
+    }, [startLetter])
 
     useEffect( () => {
         countRenders.current = countRenders.current + 1;
@@ -86,7 +86,7 @@ function App() {
 
     // console.log("currentURL >> ", currentURL);
 
-    // console.log(" DATA ", charData);
+    console.log(" DATA ", charData);
 
     // console.log(" searchFullName ", searchFullName);
 
@@ -101,6 +101,7 @@ function App() {
         }
     })
 
+    console.log("RENDER COUNT ", countRenders.current)
 
   return (
     <div>
@@ -111,7 +112,7 @@ function App() {
 
             
             <input
-                className = 'search-container'
+                className = 'search-input'
                 type = "text"
                 // maxLength = {2}
                 value = {startLetter.slice(-1)}
@@ -126,6 +127,7 @@ function App() {
 
             <label htmlFor  = 'no_image'>
                 <input 
+                    className = 'checkbox_not_found'
                     id = 'no_image'
                     htmlFor = 'no_image'
                     type = 'checkbox'
@@ -143,7 +145,7 @@ function App() {
                     <input 
                         id = 'filter'
                         type = 'text'
-                        className = 'filtered-results-container'
+                        className = 'filtered-results-input'
                         value = {filteredResults}
                         onChange = {filterResultsHandler}
                     />            
@@ -155,7 +157,7 @@ function App() {
             
                 <input 
                     type = 'text'
-                    className = 'full-search-container'
+                    className = 'full-search-input'
                     value = {searchFullName}
                     onChange = { (e) => searchHandler(e)}
                 />
@@ -170,12 +172,14 @@ function App() {
         </div>
     
 
+
         {isLoading ? 
             <div className = 'loader'> 
                 <SyncLoader color = {'red'} loading = {isLoading} size = {50}/>
             </div> : 
 
             <div className = 'results-main-container'> 
+ 
                 {error ? 
                     <div>  Error: {error}</div>
                 :
@@ -186,49 +190,56 @@ function App() {
 
                             />
                             : 
+
+
                             <div className = 'main-char-container' ref = {countItems}>
                             
-
                             {charData && charData.data.results
 
-                            .filter( (char) => {
-                                if(char.thumbnail.path.toString().includes('not') && includeImageNotFound) {
-                                    // console.log(" char name with NO IMAGE  ", char.name);
-                                } else {
-                                    // console.log(" char IMAGE EXISTS >>>>" , char.thumbnail.path.toString().includes('not'));
-                                    return char
-                                }
+                                .filter( (char) => {
+                                    if(char.thumbnail.path.toString().includes('not') && includeImageNotFound) {
+                                        // console.log(" char name with NO IMAGE  ", char.name);
+                                    } else {
+                                        // console.log(" char IMAGE EXISTS >>>>" , char.thumbnail.path.toString().includes('not'));
+                                        return char
+                                    }
 
-                            })
+                                })
 
-                        
-
-                            .map ( (char, index, arr) => {
+                                .filter( (char) => {
+                                    if(filteredResults === '') {
+                                        return char
+                                    }
+                                    else if(char.name.toLowerCase().includes(filteredResults.toLowerCase())){
+                                        return char
+                                    }
+                                                                
+                                })
                             
-                                return (
-                                    <div 
-                                        key = {char.id}
-                                        className= 'main-card'
 
-                                        > {arr.index}
-                                        <div className = 'char-name'> {char.name} {arr.length}</div>
-                                        <div className = 'image-container'> 
-                                            <img 
-                                                className = 'char-img'
-                                                src = {char.thumbnail.path + '.' + char.thumbnail.extension} 
-                                                alt = {char.name}
-                                            />
+                                .map ( (char, index, arr) => {
+                                
+                                    return (
+                                        <div 
+                                            key = {char.id}
+                                            className= 'main-card'
+
+                                            > {arr.index}
+                                            <div className = 'char-name'> {char.name} {arr.length}</div>
+                                            <div className = 'image-container'> 
+                                                <img 
+                                                    className = 'char-img'
+                                                    src = {char.thumbnail.path + '.' + char.thumbnail.extension} 
+                                                    alt = {char.name}
+                                                />
+                                            </div>
                                         </div>
-                                    </div>
-                                )
-                            
-                            })
-
+                                    )
+                                
+                                })
                                    
                             }
                             
-
-
                             </div>
                         
                         }
@@ -236,17 +247,15 @@ function App() {
                     </div>
 
                 }
-
             
             </div>
-
-
-
-            
 
         }
 
     </div>
+
+
+
   );
 }
 

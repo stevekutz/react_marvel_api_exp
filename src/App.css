@@ -12,6 +12,13 @@ h1 {
     color: rgb(245, 239, 239);
 }
 
+.checkbox_not_found {
+    background-color: black;
+
+
+}
+
+
 .edit-results-container {
     border: 1px solid white;
 
@@ -24,13 +31,35 @@ h1 {
 }
 
 
-.search-container, .full-search-container {
+
+
+.search-input {
     border: 1px solid black;
     width: 25px;
     margin: 10px;
     border-radius: 5px;
     text-align: center;
     outline-style: none;
+}
+
+.full-search-input {
+    border: 1px solid black;
+    width: 150px;
+    margin: 10px;
+    border-radius: 5px;
+    text-align: center;
+    outline-style: none; 
+
+}
+
+.filtered-results-input {
+    border: 1px solid black;
+    width: 150px;
+    margin: 10px;
+    border-radius: 5px;
+    text-align: center;
+    outline-style: none; 
+
 }
 
 .results-main-container {

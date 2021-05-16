@@ -1,7 +1,7 @@
 import {useState, useEffect } from 'react';
 
 
-const useFetch = (url) => {
+const useFetch = (url, startLetter) => {
 
     // console.log(" FETCHED DATA ")
 
@@ -25,8 +25,8 @@ const useFetch = (url) => {
             // console.log('  isLoading >>>> ', isLoading);
 
             // console.log('useFetch url ', url + process.env.REACT_APP_KEY + process.env.REACT_APP_HASH)
-            // fetch(url + process.env.REACT_APP_KEY + process.env.REACT_APP_HASH, {signal: abortCont.signal})
-            fetch(url + process.env.REACT_APP_KEY + process.env.REACT_APP_HASH)
+            fetch(url + process.env.REACT_APP_KEY + process.env.REACT_APP_HASH, {signal: abortCont.signal})
+            // fetch(url + process.env.REACT_APP_KEY + process.env.REACT_APP_HASH)
             // fetch(`"${process.env.REACT_APP_URL}"`)
             
                 .then(res => {
