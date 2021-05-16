@@ -3,7 +3,7 @@ import {useState, useEffect } from 'react';
 
 const useFetch = (url) => {
 
-    
+    // console.log(" FETCHED DATA ")
 
     const [data, setData] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
@@ -22,9 +22,9 @@ const useFetch = (url) => {
 
         setTimeout( () => {
         
-            console.log('  isLoading >>>> ', isLoading);
+            // console.log('  isLoading >>>> ', isLoading);
 
-            console.log('useFetch url ', url + process.env.REACT_APP_KEY + process.env.REACT_APP_HASH)
+            // console.log('useFetch url ', url + process.env.REACT_APP_KEY + process.env.REACT_APP_HASH)
             // fetch(url + process.env.REACT_APP_KEY + process.env.REACT_APP_HASH, {signal: abortCont.signal})
             fetch(url + process.env.REACT_APP_KEY + process.env.REACT_APP_HASH)
             // fetch(`"${process.env.REACT_APP_URL}"`)

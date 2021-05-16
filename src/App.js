@@ -1,6 +1,6 @@
 // import logo from './logo.svg';
 import './App.css';
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef, useCallback} from 'react';
 // import {css} from "@emotion/react";
 import SyncLoader from "react-spinners/SyncLoader";
 // import ClipLoader from "react-spinners/ClipLoader";
@@ -14,56 +14,41 @@ import NotFound from './comp/NotFound';
 
 function App() {
 
+
     // console.log(' secret ', process.env.REACT_APP_SECRET);
     // console.log(' key ', process.env.REACT_APP_KEY);
 
     const base_URL = "http://gateway.marvel.com/v1/public/characters?limit=100&ts=1";
-
-
+    
     // const [charData, setCharData] = useState("");
     const [startLetter, setStartLetter] = useState('a');
     const [searchFullName, setSearchFullName] = useState('');
     const [recentSearch, setRecentSearch] = useState('');
     const [includeImageNotFound, setIncludeImageNotFound] = useState('true');
-    const [currentURL, setCurrentURL] = useState(base_URL + "&nameStartsWith=" + startLetter.slice(-1))
+    // const [currentURL, setCurrentURL] = useState(base_URL + "&nameStartsWith=a");
+    const [currentURL, setCurrentURL] = useState(base_URL + "&nameStartsWith=" + startLetter.slice(-1));
+    const [charCount, setCharCount] = useState(0)
 
+    const countItems = useRef(0);
+    const countRenders = useRef(0);
+    const [filteredChar, setFilteredChar] = useState([]);
+
+    
 
     const {data: charData, isLoading, error} = useFetch(currentURL);
-
-    useEffect( () => {
-        setCurrentURL(base_URL + "&nameStartsWith=" + startLetter.slice(-1))
-    
-    }, [startLetter, searchFullName])
-
-    // let url = base_URL + "&nameStartsWith=" + startLetter.slice(-1);
-    // let url = currentURL;
-
-    // const {data: charData, isLoading, error} = useFetch(url);
-
-
-    // console.log(" url >>> ", url);
-    // console.log(" data ", charData);
 
     const inputHandler = (e) => {
 
 
-        setCurrentURL('');    
-        // let ch = e.target.value;
         let ch = e.target.value.slice(-1);
 
-        // console.log(" ch is >>  ", ch)
-        // console.log(" e.target ", e.target);
+        // console.log(" ch is >>>>>>>>>>>>>>>>>  ", ch)
+        // // // console.log(" e.target ", e.target);
 
         if (ch.match(/^[a-z]+$/i) !== null){
-            let url = ''; 
-            url = base_URL + '&nameStartsWith=' + ch;
-            // console.log("startLetter change ")
             setStartLetter(e.target.value);
-            setCurrentURL(url);
         }
 
-
-        // console.log(" >>>>>>>>>>>> startLetter ", e.target.value);
 
     }
 
@@ -85,28 +70,41 @@ function App() {
     
     }
 
-
-    // useEffect ( () => {
+    useEffect( () => {
+        setCurrentURL(base_URL + "&nameStartsWith=" + startLetter.slice(-1))
     
-    //     console.log("start letter updated")
-    
-    // }, [startLetter])
+    }, [startLetter, setStartLetter])
 
-    console.log("currentURL >> ", currentURL);
+    useEffect( () => {
+        countRenders.current = countRenders.current + 1;
+    } )
 
-    console.log(" DATA ", charData);
+    // console.log("currentURL >> ", currentURL);
 
-    console.log(" searchFullName ", searchFullName);
+    // console.log(" DATA ", charData);
 
-    console.log(" error ========> ", error);
+    // console.log(" searchFullName ", searchFullName);
+
+    // console.log(" error ========> ", error);
+
+    // console.log("Total  ", charCount );
+
+
+    useEffect( () => {
+        if(countItems.current){
+            setCharCount(countItems.current.childElementCount)
+        }
+    })
+
 
   return (
     <div>
         <div className = 'header-container'>
-            <h1> Marvel API exp </h1>
+            <h1> Marvel API exp  </h1>
+            <h2> renders: {countRenders.current} </h2>
 
 
-            {/* <div> {startLetter} </div> */}
+            
             <input
                 className = 'search-container'
                 type = "text"
@@ -114,11 +112,12 @@ function App() {
                 value = {startLetter.slice(-1)}
                 onChange = { (e) => inputHandler(e)}
             />
-
-
+            
+            
             <ClickBar 
                 setStartLetter = {setStartLetter} 
             />
+            
 
             <label htmlFor  = 'no_image'>
                 <input 
@@ -144,6 +143,8 @@ function App() {
             <button 
                 onClick = {fullNameSearch}
             > Full Name Search </button>
+
+            <div className = 'char-count'> Total Located: {charCount} </div>
         </div>
     
 
@@ -163,44 +164,47 @@ function App() {
 
                             />
                             : 
-                            <div className = 'main-char-container'>
+                            <div className = 'main-char-container' ref = {countItems}>
+                            
+
                             {charData && charData.data.results
-                                    
 
-                                .filter( (char) => {
-                                    if(char.thumbnail.path.toString().includes('not')  && includeImageNotFound) {
-                                        // console.log(" char name with NO IMAGE  ", char.name);
-                                        // return char
-                                    } else {
-                                        // console.log(" char IMAGE EXISTS >>>>" , char.thumbnail.path.toString().includes('not'));
-                                        return char
-                                    }
-                                    
+                            .filter( (char) => {
+                                if(char.thumbnail.path.toString().includes('not') && includeImageNotFound) {
+                                    // console.log(" char name with NO IMAGE  ", char.name);
+                                } else {
+                                    // console.log(" char IMAGE EXISTS >>>>" , char.thumbnail.path.toString().includes('not'));
+                                    return char
+                                }
 
-                                })
-                                
-                                
-                                .map ( (char) => {
-                                    return (
-                                        <div 
-                                            key = {char.id}
-                                            className= 'main-card'
-                                            >
-                                            <div className = 'char-name'> {char.name} </div>
-                                            <div className = 'image-container'> 
-                                                <img 
-                                                    className = 'char-img'
-                                                    src = {char.thumbnail.path + '.' + char.thumbnail.extension} 
-                                                    alt = {char.name}
-                                                />
-                                            </div>
+                            })
+
+                            .map ( (char, index, arr) => {
+                            
+                                return (
+                                    <div 
+                                        key = {char.id}
+                                        className= 'main-card'
+
+                                        > {arr.index}
+                                        <div className = 'char-name'> {char.name} {arr.length}</div>
+                                        <div className = 'image-container'> 
+                                            <img 
+                                                className = 'char-img'
+                                                src = {char.thumbnail.path + '.' + char.thumbnail.extension} 
+                                                alt = {char.name}
+                                            />
                                         </div>
-                                    )
-                                })
-                               
-                            }    
+                                    </div>
+                                )
                             
+                            })
+
+                                   
+                            }
                             
+
+
                             </div>
                         
                         }
