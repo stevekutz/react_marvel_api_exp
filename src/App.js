@@ -4,6 +4,7 @@ import React, {useState, useEffect, useRef} from 'react';
 // import {css} from "@emotion/react";
 import SyncLoader from "react-spinners/SyncLoader";
 // import ClipLoader from "react-spinners/ClipLoader";
+import marvelIntro from './img/marvel_intro.gif';
 
 import useFetch from './useFetch';
 
@@ -182,7 +183,8 @@ function App() {
 
         {isLoading ? 
             <div className = 'loader'> 
-                <SyncLoader color = {'red'} loading = {isLoading} size = {25}/>
+                {/* <SyncLoader className = '' color = {'red'} loading = {isLoading} size = {25}/> */}
+                <img src = {marvelIntro} alt = 'marvel_loader'/>
             </div> : 
 
             <div className = 'results-main-container'> 
@@ -232,7 +234,7 @@ function App() {
                                             className= 'main-card'
 
                                             > {arr.index}
-                                            <div className = 'char-name'> {char.name} {arr.length}</div>
+                                            <div className = 'char-name'> {char.name} </div>
                                             <div className = 'image-container'> 
                                                 <img 
                                                     className = 'char-img'

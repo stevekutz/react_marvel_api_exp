@@ -2,15 +2,16 @@
     /* border: 1px solid black; */
     display: flex;
     width: 700px;
-    margin: 2px auto;
-
+    margin: 4px auto;
+    justify-content: center;
+    
 
 }
 
 
 .charbox {
     /* border: 1px solid black; */
-    width: 15px;
+    width: 25px;
     padding: 2px;
     margin: 5px;
     cursor: pointer;
@@ -18,7 +19,16 @@
     font-weight: bold;
 }
 
-@media screen and (max-width: 700px) {
+.charbox:hover {
+    /* border: 1px solid rgb(238, 229, 229); */
+    border-radius: 4px;
+    background:rgb(49, 47, 47);
+    color: rgb(248, 245, 245);
+    font-weight: bold;
+
+}
+
+@media screen and (max-width: 768px) {
     .clickbox-container{
         width: 340px;
         flex-wrap: wrap;
