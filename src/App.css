@@ -4,6 +4,10 @@
     /* border-radius: 5px; */
     text-align: center;
     background: red;
+    /* background-image: url(./img/banner.jpg);
+    background-size: cover;
+    background-repeat: repeat;
+    background-position: top; */
 } 
 
 h1 {
@@ -116,7 +120,7 @@ input [type="checkbox"]  checked {
     height: 100vh;
     height: 100%;
     justify-content: center;
-    background-color: rgb(248, 244, 244);
+    /* background-color: rgb(248, 244, 244); */
     background-color: rgb(14, 13, 13);
 
 }

@@ -2,7 +2,7 @@ import React from 'react';
 
 import {createAlphaArray} from '../Helper';
 import './clickbar.css';
-
+import banner from '../img/banner.jpg';
 
 
 const ClickBar = ({setStartLetter, setSearchFullName}) => {

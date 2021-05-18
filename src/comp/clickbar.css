@@ -4,17 +4,17 @@
     width: 700px;
     margin: 4px auto;
     justify-content: center;
-    
 
 }
 
 
 .charbox {
     /* border: 1px solid black; */
-    width: 25px;
+    width: 50px;
     padding: 2px;
     margin: 5px;
     cursor: pointer;
+    font-size: 18px;
     color: rgb(245, 239, 239);
     font-weight: bold;
 }

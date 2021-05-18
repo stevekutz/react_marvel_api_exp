@@ -6,9 +6,10 @@ import SyncLoader from "react-spinners/SyncLoader";
 // import ClipLoader from "react-spinners/ClipLoader";
 import marvelIntro from './img/marvel_intro.gif';
 
+
 import useFetch from './useFetch';
 
-
+import Nav from './comp/Nav';
 import ClickBar from './comp/ClickBar';
 import NotFound from './comp/NotFound';
 
@@ -111,8 +112,10 @@ function App() {
 
   return (
     <div>
+        <Nav />
+
+
         <div className = 'header-container'>
-            <h1> Marvel API exp</h1>
             <div> renders: {countRenders.current} </div>
 
 
