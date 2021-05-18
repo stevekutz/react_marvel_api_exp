@@ -14,17 +14,15 @@ const Nav = () => {
                 <div className = 'nav-link-container'> 
                     <div className = 'nav-link'>
         
-                    Characters    
+                        <Link className = 'nav-link' to = '/'> Home </Link>
                     </div>
 
-                    <div className = 'nav-link'>
-        
-                    Link 2                    
+                    <div className = 'nav-link'>        
+                        <Link className = 'nav-link' to = '/characters'> Characters </Link>                    
                     </div>
 
-                    <div className = 'nav-link'>
-        
-                    Link 3                    
+                    <div className = 'nav-link'>        
+                        <Link className = 'nav-link' to = '/about'> About </Link>                    
                     </div>
 
                 
@@ -32,9 +30,10 @@ const Nav = () => {
             
             
             </div>
-
+            {/*
             <img className = 'nav-banner-img' src = {banner} alt= 'banner'/>
-            
+            */}
+
             <div className = 'nav-login'>
                 Login / Signup
             

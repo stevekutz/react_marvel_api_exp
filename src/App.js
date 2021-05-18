@@ -1,5 +1,5 @@
 // import logo from './logo.svg';
-// import './App.css';
+import './App.css';
 // import React, {useState, useEffect, useRef} from 'react';
 // // import {css} from "@emotion/react";
 // import SyncLoader from "react-spinners/SyncLoader";
@@ -8,9 +8,12 @@
 
 
 // import useFetch from './comp/useFetch';
+import {Route, Switch, } from 'react-router-dom';
 
 import Nav from './comp/Nav';
+import Home from './comp/Home';
 import Characters from './comp/Characters';
+import About from './comp/About';
 
 
 
@@ -19,8 +22,15 @@ function App() {
   return (
     <div>
         <Nav />
-        <Characters />
-    
+        
+        <div>
+            <Switch>
+                <Route exact path = '/'> <Home />  </Route>
+                <Route path = '/characters'> <Characters />  </Route>
+                <Route path = '/about'> <About /> </Route>
+            
+            </Switch>
+        </div>
         
 
 

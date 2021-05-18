@@ -1,5 +1,6 @@
 .full-char-container {
     /* border: 10px solid green; */
+    /* margin-top: 150px; */
     display: flex;
     flex-direction: column;
 }

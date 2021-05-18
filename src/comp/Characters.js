@@ -1,4 +1,3 @@
-import './characters.css';
 import React, {useState, useEffect, useRef} from 'react';
 // import {css} from "@emotion/react";
 import SyncLoader from "react-spinners/SyncLoader";
@@ -10,6 +9,7 @@ import useFetch from './useFetch';
 
 import ClickBar from './ClickBar';
 import NotFound from './NotFound';
+import './characters.css';
 
 
 function Characters() {
