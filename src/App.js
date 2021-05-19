@@ -13,6 +13,7 @@ import {Route, Switch, } from 'react-router-dom';
 import Nav from './comp/Nav';
 import Home from './comp/Home';
 import Characters from './comp/Characters';
+import Comics from './comp/Comics';
 import Items from './comp/Items';
 import About from './comp/About';
 
@@ -28,7 +29,8 @@ function App() {
             <Switch>
                 <Route exact path = '/'> <Home />  </Route>
                 <Route path = '/characters'> <Characters />  </Route>
-                <Route path = '/comics'> <Items/>  </Route>
+                <Route path = '/comics' > <Comics /> </Route>
+                <Route path = '/items'> <Items/>  </Route>
                 <Route path = '/about'> <About /> </Route>
             
             </Switch>

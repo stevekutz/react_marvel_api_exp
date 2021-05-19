@@ -9,17 +9,17 @@ import useFetch from './useFetch';
 
 import ClickBar from './ClickBar';
 import NotFound from './NotFound';
-import './items.css';
+import './comics.css';
 
 
-function Items() {
+function Comics() {
 
 
     // console.log(' secret ', process.env.REACT_APP_SECRET);
     // console.log(' key ', process.env.REACT_APP_KEY);
 
     // const base_URL = "http://gateway.marvel.com/v1/public/comics?limit=100&ts=1";
-    const base_URL = "http://gateway.marvel.com/v1/public/comics?ts=1"
+    const base_URL = "http://gateway.marvel.com/v1/public/comics?limit=100&ts=1"
     
 
     // const [charData, setCharData] = useState("");
@@ -275,4 +275,4 @@ function Items() {
   );
 }
 
-export default Items;
+export default Comics;
