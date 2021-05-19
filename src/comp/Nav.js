@@ -12,13 +12,14 @@ const Nav = () => {
             <div className = 'nav-left-container'>
                 <div className = 'nav-title'> Marvel API exp </div>
                 <div className = 'nav-link-container'> 
-                    <div className = 'nav-link'>
-        
-                        <Link className = 'nav-link' to = '/'> Home </Link>
-                    </div>
 
                     <div className = 'nav-link'>        
-                        <Link className = 'nav-link' to = '/characters'> Characters </Link>                    
+                        <Link exact className = 'nav-link' to = '/'> Characters </Link>                    
+                    </div>
+                   
+                    <div className = 'nav-link'>
+        
+                        <Link className = 'nav-link' to = '/comics'> Comics </Link>
                     </div>
 
                     <div className = 'nav-link'>        

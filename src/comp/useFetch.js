@@ -3,7 +3,7 @@ import {useState, useEffect } from 'react';
 
 const useFetch = (url, startLetter) => {
 
-    // console.log(" FETCHED DATA ")
+    console.log(" url ", url);
 
     const [data, setData] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
@@ -56,6 +56,8 @@ const useFetch = (url, startLetter) => {
         return () => abortCont.abort();
     
     }, [url])
+
+    console.log("useFetch data ", data);
 
     return { data, isLoading, error };
     // return {data, isLoading, error}
