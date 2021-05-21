@@ -14,6 +14,8 @@ import Nav from './comp/Nav';
 import Home from './comp/Home';
 import Characters from './comp/Characters';
 import Comics from './comp/Comics';
+import Creators from './comp/Creators';
+import Events from './comp/Events';
 import Items from './comp/Items';
 import About from './comp/About';
 
@@ -30,6 +32,8 @@ function App() {
                 <Route exact path = '/'> <Home />  </Route>
                 <Route path = '/characters'> <Characters />  </Route>
                 <Route path = '/comics' > <Comics /> </Route>
+                <Route path = '/creators'> <Creators />  </Route>
+                <Route path = '/events'> <Events />  </Route>
                 <Route path = '/items'> <Items/>  </Route>
                 <Route path = '/about'> <About /> </Route>
             

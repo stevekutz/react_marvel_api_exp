@@ -19,9 +19,8 @@ function Items() {
     // console.log(' key ', process.env.REACT_APP_KEY);
 
     // const base_URL = "http://gateway.marvel.com/v1/public/comics?limit=100&ts=1";
-    const base_URL = "http://gateway.marvel.com/v1/public/comics?ts=1"
+    const base_URL = "http://gateway.marvel.com/v1/public/comics?limit=100&ts=1"
     
-
     // const [charData, setCharData] = useState("");
     const [startLetter, setStartLetter] = useState('a');
     const [searchFullName, setSearchFullName] = useState('');

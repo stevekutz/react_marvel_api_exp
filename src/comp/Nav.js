@@ -23,13 +23,28 @@ const Nav = () => {
                         <Link exact className = 'nav-link' to = '/characters'> Characters </Link>                    
                     </div>
                    
-                    <div className = 'nav-link'>
-        
+                    <div className = 'nav-link'>        
                         <Link className = 'nav-link' to = '/comics'> Comics </Link>
                     </div>
 
-                    <div className = 'nav-link'>
-        
+                    <div className = 'nav-link'>        
+                        <Link className = 'nav-link' to = '/creators'> Creators </Link>
+                    </div>
+
+                    <div className = 'nav-link'>        
+                        <Link className = 'nav-link' to = '/events'> Events </Link>
+                    </div>
+
+                    <div className = 'nav-link'>        
+                        <Link className = 'nav-link' to = '/series'> Series </Link>
+                    </div>
+
+
+                    <div className = 'nav-link'>        
+                        <Link className = 'nav-link' to = '/stories'> Stories </Link>
+                    </div>
+
+                    <div className = 'nav-link'>        
                         <Link className = 'nav-link' to = '/items'> Items </Link>
                     </div>
 

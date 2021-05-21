@@ -19,7 +19,7 @@ function Characters() {
     // console.log(' key ', process.env.REACT_APP_KEY);
 
     // const base_URL = "http://gateway.marvel.com/v1/public/comics?limit=100&ts=1";
-    const base_URL = "http://gateway.marvel.com/v1/public/comics?ts=1"
+    const base_URL = "http://gateway.marvel.com/v1/public/characters?limit=100&ts=1"
     
 
     // const [charData, setCharData] = useState("");
@@ -83,10 +83,10 @@ function Characters() {
     
     }
 
-    // useEffect( () => {
-    //     setCurrentURL(base_URL + "&nameStartsWith=" + startLetter.slice(-1))
+    useEffect( () => {
+        setCurrentURL(base_URL + "&nameStartsWith=" + startLetter.slice(-1))
     
-    // }, [startLetter])
+    }, [startLetter])
 
     useEffect( () => {
         countRenders.current = countRenders.current + 1;

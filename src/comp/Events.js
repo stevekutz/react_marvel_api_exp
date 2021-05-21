@@ -9,22 +9,18 @@ import useFetch from './useFetch';
 
 import ClickBar from './ClickBar';
 import NotFound from './NotFound';
-import './comics.css';
+import './creators.css';
 
 
-function Comics() {
-
-
-
+function Creators() {
 
 
     // console.log(' secret ', process.env.REACT_APP_SECRET);
     // console.log(' key ', process.env.REACT_APP_KEY);
 
     // const base_URL = "http://gateway.marvel.com/v1/public/comics?limit=100&ts=1";
-    const base_URL = "http://gateway.marvel.com/v1/public/comics?limit=100&ts=1"
+    const base_URL = "http://gateway.marvel.com/v1/public/events?limit=100&ts=1"
     
-
     // const [charData, setCharData] = useState("");
     const [startLetter, setStartLetter] = useState('a');
     const [searchFullName, setSearchFullName] = useState('');
@@ -244,7 +240,7 @@ function Comics() {
                                             className= 'main-card'
 
                                             > {arr.index}
-                                            <div className = 'char-name'> {char.name || char.title} </div>
+                                            <div className = 'char-name'> { char.title} </div>
                                             <div className = 'image-container'> 
                                                 <img 
                                                     className = 'char-img'
@@ -278,4 +274,4 @@ function Comics() {
   );
 }
 
-export default Comics;
+export default Creators;
