@@ -71,14 +71,15 @@ function Comics() {
 
     const fullNameSearch = () => {
 
-        if(searchFullName.length !== 0) {
+        if(searchFullName.length !== 0 && typeof(searchFullName) === 'string') {
+
             setRecentSearch(searchFullName);
             setCurrentURL(base_URL + "&name=" + searchFullName);
             // setStartLetter(searchFullName[0]);
             // setSearchFullName("");
         
         
-        }
+        } 
     }
 
     const toggleIncludeNoImageFound = () => {

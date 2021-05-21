@@ -68,13 +68,20 @@ function Characters() {
 
     const fullNameSearch = () => {
 
-        if(searchFullName.length !== 0) {
+        console.log('searchFullName is  ', typeof(searchFullName) );
+
+        if(searchFullName.length !== 0 && !searchFullName.match(/^[0-9]/)) {
+
             setRecentSearch(searchFullName);
             setCurrentURL(base_URL + "&name=" + searchFullName);
             // setStartLetter(searchFullName[0]);
             // setSearchFullName("");
         
         
+        } else if (searchFullName.match(/^[0-9]/) && searchFullName.length === 7){
+            setRecentSearch(searchFullName);
+            setCurrentURL("http://gateway.marvel.com/v1/public/characters/" + searchFullName + "?&ts=1")
+            // setCurrentURL(base_URL + '?' + searchFullName)
         }
     }
 
@@ -177,7 +184,7 @@ function Characters() {
                     <button 
                         className = 'fullname-search-button'
                         onClick = {fullNameSearch}
-                    > Full Name Search </button>
+                    > Full Name / ID Search </button>
                 </div>    
             </div>
 
@@ -241,7 +248,7 @@ function Characters() {
                                             className= 'main-card'
 
                                             > {arr.index}
-                                            <div className = 'char-name'> {char.name || char.title} </div>
+                                            <div className = 'char-name'> {char.name} {char.id}</div>
                                             <div className = 'image-container'> 
                                                 <img 
                                                     className = 'char-img'

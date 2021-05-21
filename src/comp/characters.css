@@ -242,16 +242,23 @@ input [type="checkbox"]  checked {
 }
 
 @media screen and (max-width: 768px) {
+    .header-container {
+        border: 1px solid yellow;    }
+    
     .edit-results-container {
-        width: 70%;
+        border: 1px solid green;
+        width: 100%;
         flex-direction: column;
         margin: 2px auto;
     }
 
     .filter-results-container, .fullname-search-container {
-        width: 60%;
-        margin: 0px auto;
+        border: 1px solid blue;
+        /* margin: 0px auto; */
+        width: 100%;
     }
+
+
 
     .char-count {
         /* width: 28%; */
