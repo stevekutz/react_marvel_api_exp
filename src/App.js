@@ -13,6 +13,7 @@ import {Route, Switch, } from 'react-router-dom';
 import Nav from './comp/Nav';
 import Home from './comp/Home';
 import Characters from './comp/Characters';
+import Character from './comp/Character';
 import Comics from './comp/Comics';
 import Creators from './comp/Creators';
 import Events from './comp/Events';
@@ -30,7 +31,8 @@ function App() {
         <div>
             <Switch>
                 <Route exact path = '/'> <Home />  </Route>
-                <Route path = '/characters'> <Characters />  </Route>
+                <Route exact path = '/characters'> <Characters />  </Route>
+                <Route exact path = '/characters/:ID' > <Character /> </Route>
                 <Route path = '/comics' > <Comics /> </Route>
                 <Route path = '/creators'> <Creators />  </Route>
                 <Route path = '/events'> <Events />  </Route>

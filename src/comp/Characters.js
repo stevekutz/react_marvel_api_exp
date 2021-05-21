@@ -1,10 +1,12 @@
 import React, {useState, useEffect, useRef} from 'react';
+import {Link, useRouteMatch, Route} from 'react-router-dom';
 // import {css} from "@emotion/react";
 import SyncLoader from "react-spinners/SyncLoader";
 // import ClipLoader from "react-spinners/ClipLoader";
 import marvelIntro from '../img/marvel_intro.gif';
 
 
+import Character from './Character';
 import useFetch from './useFetch';
 
 import ClickBar from './ClickBar';
@@ -12,7 +14,10 @@ import NotFound from './NotFound';
 import './characters.css';
 
 
+
 function Characters() {
+
+    const {url, path } = useRouteMatch();
 
 
     // console.log(' secret ', process.env.REACT_APP_SECRET);
@@ -247,15 +252,18 @@ function Characters() {
                                             key = {char.id}
                                             className= 'main-card'
 
-                                            > {arr.index}
-                                            <div className = 'char-name'> {char.name} {char.id}</div>
-                                            <div className = 'image-container'> 
-                                                <img 
-                                                    className = 'char-img'
-                                                    src = {char.thumbnail.path + '.' + char.thumbnail.extension} 
-                                                    alt = {char.name}
-                                                />
-                                            </div>
+                                            >
+                                            <Link to = {`${url}/${char.id}`} >
+                                                <div className = 'char-name'> {char.name} {char.id}</div>
+                                                <div className = 'image-container'> 
+                                                    <img 
+                                                        className = 'char-img'
+                                                        src = {char.thumbnail.path + '.' + char.thumbnail.extension} 
+                                                        alt = {char.name}
+                                                    />
+                                                </div>
+                                                                                        
+                                            </Link>
                                         </div>
                                     )
                                 
@@ -274,6 +282,21 @@ function Characters() {
             </div>
 
         }
+
+
+
+        <Route
+            exact path = {`${path}/:ID`}
+            
+
+        >
+            <Character 
+                charData = {charData}
+            />
+        
+        </Route>
+
+
 
     </div>
 
